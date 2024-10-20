@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>SpotWikiEdit</title>
+  <link rel="icon" href="{{url_for('static',filename='images/sandbox_icon.png')}}">
+  <link rel="stylesheet" href="{{url_for('static',filename='styles/style.css')}}">
+
+
+</head>
+
+<body>
+  <p><span>S</span>potWikiEdit</p>
+
+  <form action="." method="post">
+    <label for="username">Bot Username</label><br>
+    <input type="text" id="username" name="name" placeholder="Enter your username" required><br>
+
+    <label for="password">Bot Password</label><br>
+    <input type="password" id="myInput" name="password" placeholder="Enter your password" required><br>
+
+    <div class="checkbox-wrapper-1">
+      <input id="example-1" class="substituted" type="checkbox" aria-hidden="true" onclick="myFunction()">
+      <label for="example-1" class="show">Show Password</label>
+    </div>
+
+    <div class="btn">
+      <button>Log in</button>
+    </div>
+    <div class="create">
+      <a href="https://en.wikipedia.org/w/index.php?title=Special:CreateAccount&returnto=Main+Page">
+        Create account</a>
+    </div>
+  </form>
+  <script>
+    function myFunction() {
+      var x = document.getElementById("myInput");
+      if (x.type === "password") {
+        x.type = "text";
+      } else {
+        x.type = "password";
+      }
+    } 
+  </script>
+</body>
+
+</html>

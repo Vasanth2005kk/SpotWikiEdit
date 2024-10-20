@@ -1,0 +1,133 @@
+* {
+    padding: 0px;
+    margin: 0px;
+}
+
+p {
+    text-align: center;
+    font-size: 40px;
+    padding: 10px;
+    font-weight: 200px;
+    text-transform: uppercase;
+    font-family: serif;
+}
+
+span {
+    font-size: 60px;
+    font-weight: 700px;
+}
+
+form {
+    width: 500px;
+    height: 300px;
+    box-sizing: border-box;
+    padding-top: 10px;
+    position: relative;
+    left: 400px;
+    padding-left: 100px;
+    font-family: sans-serif;
+}
+
+label {
+    padding: 20px;
+    font-weight: 700;
+    font-size: 20px;
+    display: inline-block;
+}
+.show{
+    padding: 20px;
+    font-weight: 400;
+    font-size: 15px;
+    display: inline-block;
+}
+
+label input {
+    margin-top: 20px;
+    margin-left: 50px;
+}
+
+.checkbox-wrapper-1 {
+    padding-left: 20px;
+    margin-top: -5px;
+}
+
+input[type="text"],
+input[type="password"] {
+    padding: 5px;
+    border: 2px solid #909398;
+    font-size: 20px;
+    outline: none;
+    margin-left: 73px;
+}
+
+.btn {
+    padding-top: 30px;
+    padding-left: 73px;
+}
+
+.btn button {
+    font-size: 20px;
+    color: white;
+    font-weight: 800;
+    width: 250px;
+    padding: 4px;
+    border: none;
+    background-color: #3366cc;
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+.btn button:hover {
+    opacity: 1;
+}
+.create{
+    padding: 5px;
+    width: 250px;
+    margin-left:60px;
+    margin-top: 10px;
+}
+.create a{
+    text-decoration: none;
+    padding-top: 30px;
+    padding-left: 73px;
+}
+
+.checkbox-wrapper-1 *,
+.checkbox-wrapper-1::after,
+.checkbox-wrapper-1::before {
+    box-sizing: border-box;
+}
+
+.checkbox-wrapper-1 [type=checkbox].substituted {
+    margin: 0;
+    width: 0;
+    height: 0;
+    display: inline;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.checkbox-wrapper-1 [type=checkbox].substituted+label:before {
+    content: "";
+    display: inline-block;
+    vertical-align: top;
+    height: 1.15em;
+    width: 1.15em;
+    margin-right: 0.6em;
+    color: rgba(0, 0, 0, 0.275);
+    border: solid 0.06em;
+    box-shadow: 0 0 0.04em, 0 0.06em 0.16em -0.03em inset, 0 0 0 0.07em transparent inset;
+    border-radius: 0.2em;
+    background: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xml:space="preserve" fill="white" viewBox="0 0 9 9"><rect x="0" y="4.3" transform="matrix(-0.707 -0.7072 0.7072 -0.707 0.5891 10.4702)" width="4.3" height="1.6" /><rect x="2.2" y="2.9" transform="matrix(-0.7071 0.7071 -0.7071 -0.7071 12.1877 2.9833)" width="6.1" height="1.7" /></svg>') no-repeat center, white;
+    background-size: 0;
+    will-change: color, border, background, background-size, box-shadow;
+    transform: translate3d(0, 0, 0);
+    transition: color 0.1s, border 0.1s, background 0.15s, box-shadow 0.1s;
+}
+
+.checkbox-wrapper-1 [type=checkbox].substituted:checked+label:before {
+    background-color: #3B99FC;
+    background-size: 0.75em;
+    color: rgba(0, 0, 0, 0.075);
+}

@@ -1,0 +1,124 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+    overflow: hidden;
+}
+
+.fullbox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+}
+
+.leftbox {
+    position: relative;
+    top: 20px;
+    left: 10px;
+    width: 55%;
+    height: 70%;
+    border: 1px solid #9b9b9b;
+    overflow: auto;
+    padding-left: 10px;
+    font-size: 1rem;
+    line-height: 1.6;
+    overflow-x: visible;
+}
+
+.username {
+    display: inline;
+    position: relative;
+    top: 120px;
+    left: 50px;
+    font-family: 'Linux Libertine', 'Georgia', 'Times', 'Source Serif Pro', serif;
+    line-height: 1.375;
+    font-size: 1.8em;
+    color: #101418;
+    z-index: 3;
+}
+
+.sandbox-logo p{
+    text-align: center;
+    font-size: 40px;
+    padding: 10px;
+    font-weight: 200px;
+    text-transform: uppercase;
+    font-family: serif;
+}
+.sandbox-logo p span{
+    font-size: 60px;
+    font-weight: 700px;
+}
+
+.rightbox {
+    position: relative;
+    margin-left: 40px;
+    width: 40%;
+    height: 100%;
+}
+
+form {
+    width: 500px;
+    height: 300px;
+    box-sizing: border-box;
+    font-family: sans-serif;
+    position: relative;
+    top: 15%;
+    left: 15%;
+}
+
+label {
+    padding: 20px 0px;
+    font-weight: 700;
+    font-size: 20px;
+    display: inline-block;
+}
+
+input[type="text"],
+input[type="password"] {
+    padding: 5px;
+    border: 2px solid #909398;
+    font-size: 20px;
+    outline: none;
+    margin-left: 73px;
+}
+
+.btn {
+    width: 400px;
+    height: 70px;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.btn .conformbtn,
+.clearbtn {
+    font-size: 20px;
+    color: white;
+    font-weight: 800;
+    border: none;
+    background-color: #3366cc;
+    opacity: 0.8;
+    cursor: pointer;
+    padding: 5px 20px;
+}
+
+.conformbtn {
+    margin-left: 25px;
+}
+
+.clearbtn {
+    margin-right: 25px;
+}
+
+.btn button:hover {
+    opacity: 1;
+}
