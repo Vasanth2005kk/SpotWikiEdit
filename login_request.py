@@ -1,13 +1,13 @@
 import requests
 import json 
 
-# Base URL for the Wikipedia API
+# Wikipedia API
 BASE_URL = 'https://en.wikipedia.org/w/api.php'
 
 # Create a session object to persist cookies and session
 session = requests.Session()
 
-# Fetch a login token
+# login token
 def login_token():        
     params = {
         'action': 'query',
@@ -24,7 +24,7 @@ def login_token():
 def login(USERNAME,PASSWORD):
     if USERNAME:
         if PASSWORD:
-            # Send a post request to log in using the login token
+
             login_params = {
                 'action': 'clientlogin',
                 'format': 'json',
@@ -35,22 +35,53 @@ def login(USERNAME,PASSWORD):
             }
 
             login_response = session.post(BASE_URL, data=login_params)
-            print(login_response.json())
+            # print(login_response.json())
 
-            # Check for errors
+
             if 'error' in login_response.json():
-                print("Login failed: ", login_response.json()['error']['info'])
+                # print("Login failed: ", login_response.json()['error']['info'])
+                return False
             else:
-                print("Login successful!")
+                if login_response.json()["clientlogin"]["status"] == "PASS":
+                    return True
+                else:
+                    return  False
         else:
             return json.dumps({"error": "not for the password!"})
     else:
         return json.dumps({"error " : "not for the username !"})
 
 
-# Your Wikipedia username and password
-# USERNAME = ''
-# PASSWORD = ''
+#  CSRF token
+def get_csrf_token():
+    params = {
+        'action': 'query',
+        'meta': 'tokens',
+        'format': 'json'
+    }
+    response = session.get(BASE_URL, params=params)
+    if response.status_code == 200:
+        return response.json()['query']['tokens']['csrftoken']
+    else:
+        return ("Failed to fetch CSRF token")
 
-# print(login(USERNAME,PASSWORD))
+# Edit sandbox content 
+def edit_sandbox(username, new_content):
+    csrf_token = get_csrf_token()
+    
+    edit_params = {
+        'action': 'edit',
+        'title': f"User:{username}/sandbox",
+        'text': new_content,
+        'token': csrf_token,
+        'format': 'json'
+    }
+
+    response = session.post(BASE_URL, data=edit_params)
+    edit_data = response.json()
+
+    if 'edit' in edit_data and edit_data['edit']['result'] == 'Success':
+        print(f"Successfully edited sandbox for {username}")
+    else:
+        return ("Edit unsuccessful.")
 
