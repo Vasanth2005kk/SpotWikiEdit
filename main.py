@@ -4,7 +4,7 @@ import sandbox_content as sdbox
 
 app = Flask(__name__)
 
-X = "VasanthShetty55"
+X = None
 
 @app.route("/", methods=["GET", "POST"])
 def index():
