@@ -7,11 +7,24 @@
   <link rel="icon" href="{{url_for('static',filename='images/sandbox_icon.png')}}">
   <link rel="stylesheet" href="{{url_for('static',filename='styles/style.css')}}">
 
-
+  <!-- Include Toastr CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 </head>
 
 <body>
   <p><span>S</span>potWikiEdit</p>
+
+  <!-- Process flash messages -->
+  {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div id="flash-data" data-messages='[
+      {% for category, message in messages %}
+        {"category": "{{ category }}", "message": "{{ message }}"}
+        {% if not loop.last %}, {% endif %}
+      {% endfor %}
+    ]'></div>
+  {% endif %}
+  {% endwith %}
 
   <form action="." method="post">
     <label for="username">Bot Username</label><br>
@@ -29,11 +42,18 @@
       <button>Log in</button>
     </div>
     <div class="create">
-      <a href="https://en.wikipedia.org/w/index.php?title=Special:CreateAccount&returnto=Main+Page">
-        Create account</a>
+      <a href="https://en.wikipedia.org/w/index.php?title=Special:CreateAccount&returnto=Main+Page">Create account</a>
     </div>
   </form>
+
+  <!-- Include jQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <!-- Include Toastr JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
   <script>
+    // Function to show/hide password
     function myFunction() {
       var x = document.getElementById("myInput");
       if (x.type === "password") {
@@ -41,7 +61,29 @@
       } else {
         x.type = "password";
       }
-    } 
+    }
+
+    // Show Toastr notifications based on flash messages
+    window.onload = function() {
+      var flashData = document.getElementById('flash-data');
+      if (flashData) {
+        var messages = JSON.parse(flashData.getAttribute('data-messages'));
+
+        // Loop through the messages and display them
+        messages.forEach(function(msg) {
+          if (msg.category === 'success') {
+            toastr.success(msg.message);
+
+            // Delay redirect by 3 seconds after showing success message
+            setTimeout(function() {
+              window.location.href = "http://localhost:5000/sandboxContent";
+            }, 1000);
+          } else if (msg.category === 'error') {
+            toastr.error(msg.message);
+          }
+        });
+      }
+    };
   </script>
 </body>
 

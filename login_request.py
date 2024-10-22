@@ -1,13 +1,10 @@
 import requests
-import json 
+import json
 
-# Wikipedia API
 BASE_URL = 'https://en.wikipedia.org/w/api.php'
-
-# Create a session object to persist cookies and session
 session = requests.Session()
 
-# login token
+# Get login token
 def login_token():        
     params = {
         'action': 'query',
@@ -21,10 +18,9 @@ def login_token():
         login_token = response.json()['query']['tokens']['logintoken']
         return login_token
 
-def login(USERNAME,PASSWORD):
+def login(USERNAME, PASSWORD):
     if USERNAME:
         if PASSWORD:
-
             login_params = {
                 'action': 'clientlogin',
                 'format': 'json',
@@ -35,24 +31,19 @@ def login(USERNAME,PASSWORD):
             }
 
             login_response = session.post(BASE_URL, data=login_params)
-            # print(login_response.json())
-
-
             if 'error' in login_response.json():
-                # print("Login failed: ", login_response.json()['error']['info'])
                 return False
             else:
                 if login_response.json()["clientlogin"]["status"] == "PASS":
                     return True
                 else:
-                    return  False
+                    return False
         else:
-            return json.dumps({"error": "not for the password!"})
+            return json.dumps({"error": "Password is required!"})
     else:
-        return json.dumps({"error " : "not for the username !"})
+        return json.dumps({"error": "Username is required!"})
 
-
-#  CSRF token
+# Get CSRF token
 def get_csrf_token():
     params = {
         'action': 'query',
@@ -63,12 +54,12 @@ def get_csrf_token():
     if response.status_code == 200:
         return response.json()['query']['tokens']['csrftoken']
     else:
-        return ("Failed to fetch CSRF token")
+        return "Failed to fetch CSRF token"
 
-# Edit sandbox content 
+# Edit sandbox content
 def edit_sandbox(username, new_content):
     csrf_token = get_csrf_token()
-    
+
     edit_params = {
         'action': 'edit',
         'title': f"User:{username}/sandbox",
@@ -83,5 +74,4 @@ def edit_sandbox(username, new_content):
     if 'edit' in edit_data and edit_data['edit']['result'] == 'Success':
         print(f"Successfully edited sandbox for {username}")
     else:
-        return ("Edit unsuccessful.")
-
+        return "Edit unsuccessful."
