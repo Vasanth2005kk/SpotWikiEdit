@@ -35,8 +35,8 @@ def sandbox():
     global X
     old_word = request.form.get("old_words") 
     new_word = request.form.get("new_words") 
-    sandboxcontent = sdbox.fetch_sandbox_content(X).split("\n")
-    sandboxcontent = "<br>".join(sandboxcontent)
+    sandboxcontent = sdbox.fetch_sandbox_content(X).split("<br>")
+    sandboxcontent = "\n".join(sandboxcontent)
     output = sandboxcontent.replace(str(old_word), str(new_word))
 
     login_request.edit_sandbox(username=X, new_content=output)
@@ -44,4 +44,4 @@ def sandbox():
     return render_template("sandbox.html", user_name=X, content=output)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True,port=5000)

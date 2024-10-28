@@ -16,9 +16,8 @@
 <body>
     <div class="username">User: {{user_name}}</div>
     <div class="fullbox">
-        <div class="leftbox"><br>
-            {{content | safe}}
-        </div>
+        <textarea class="leftbox" id="sandboxContent">{{content}}
+        </textarea>
         <div class="rightbox">
             <div class="sandbox-logo">
                 <p><span>S</span>potWikiEdit <i class="fa-solid fa-pen"></i></p>
@@ -32,17 +31,12 @@
 
                 <div class="btn">
                     <button type="submit" class="conformbtn">Confirm</button>
-                    <button type="reset" class="clearbtn">Clear</button>
+                    <button type="reset" class="clearbtn" id="clearButton">Clear</button>
                 </div>
             </form>
         </div>
     </div>
-    <script>
-        document.getElementById('clearButton').addEventListener('click', function() {
-            document.getElementById('Search_word').value = '';
-            document.getElementById('Replace_word').value = '';
-        });
-    </script>
+    <script src="{{url_for('static', filename='js/script.js')}}"></script>
 </body>
 
 </html>
