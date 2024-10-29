@@ -13,7 +13,7 @@ def fetch_sandbox_content(username):
             sandbox_content = page['revisions'][0]['*']
             return sandbox_content
         else:
-            return "No content found in sandbox."
+            return "No content in found in sandbox."
     else:
         return f"Error fetching data: {response.status_code}"
 # wikipediya user name 
