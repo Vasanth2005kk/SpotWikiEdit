@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, jsonify
+from flask import Flask, render_template, request, redirect, url_for, flash, jsonify,make_response
 import login_request
 import sandbox_content as sdbox
 import os
@@ -9,7 +9,6 @@ CORS(app)
 app.secret_key = os.urandom(12).hex()  # Required for session and flash messaging
 
 X = None  # Global user name
-responseData = None
 
 @app.route("/", methods=["GET", "POST"])
 def index():
@@ -33,33 +32,30 @@ def index():
 
     return render_template("index.html")
 
-# API endpoint to receive data from frontend
-@app.route("/sandData", methods=["POST"])
-def sand_data():
-    global responseData
-    data = request.get_json()  # Retrieve JSON data from the request
-    print("Data received:", data)  # Print data to verify
-    responseData = {"status": "success", "data": data}  # Create a response object
-    return jsonify(responseData)  # Return a JSON response to the client
 
-
-@app.route("/sandboxContent", methods=["GET", "POST"])
+@app.route("/sandboxContent", methods=["GET","POST"])
 def sandbox():
     global X
-    old_word = request.form.get("old_words")
-    new_word = request.form.get("new_words")
     sandboxcontent = sdbox.fetch_sandbox_content(X).split("<br>")
-    
     sandboxcontent = "\n".join(sandboxcontent)
-    
-    output = sandboxcontent.replace(str(old_word), str(new_word),responseData['data']['index'])
+    return render_template("sandbox.html", user_name=X, content=sandboxcontent)
 
-    if old_word and new_word:
-        login_request.edit_sandbox(username=X, new_content=output)
+
+@app.route('/receive_data', methods=["POST"])
+def receive_data():
+    data = request.get_json()
+    print("Received data:", data)
+
+    if data['status'] == "PASS":
+        login_request.edit_sandbox(
+            username=X,
+            new_content=data['EditSandBoxContent']
+            )
+        print("sandbox edit is successfully !")
     else:
-        print("not editing sandbox!")
+        print("sandbox edit is not found !")
 
-    return render_template("sandbox.html", user_name=X, content=output)
+    return make_response(jsonify({"status": "success"}), 200)
 
 if __name__ == "__main__":
     app.run(debug=True, port=5000)

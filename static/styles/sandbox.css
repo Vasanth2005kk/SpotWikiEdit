@@ -90,6 +90,7 @@ input[type="password"] {
     font-size: 20px;
     outline: none;
     margin-left: 73px;
+    color: black;
 }
 
 .btn {
