@@ -33,3 +33,6 @@ URL:
 
     https://www.mediawiki.org/wiki/API:Main_page
     
+# Issue:
+
+This code works only in Chrome but does not work in Firefox.

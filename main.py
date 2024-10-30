@@ -44,7 +44,7 @@ def sandbox():
 @app.route('/receive_data', methods=["POST"])
 def receive_data():
     data = request.get_json()
-    print("Received data:", data)
+    # print("Received data:", data)
 
     if data['status'] == "PASS":
         login_request.edit_sandbox(

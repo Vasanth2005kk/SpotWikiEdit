@@ -55,17 +55,18 @@ document.getElementById("conformBTN").addEventListener("click", function () {
     if (EditoOldWord && EditNewText) {
         let textArea = document.getElementById('sandboxContent').value.split(" ");
 
-        alert(`old word ${EditoOldWord} : new word ${EditNewText} ,:indexes  ${selectIndexs.index} username :${WikiUserName} :sandbocContent: ${textArea}`)
+        // alert(`old word ${EditoOldWord} : new word ${EditNewText} ,:indexes  ${selectIndexs.index} username :${WikiUserName} :sandbocContent: ${textArea}`)
 
         textArea[selectIndexs.index] = EditNewText
 
 
         let EditSandBoxContent = textArea.join(" ")
 
-        alert(EditSandBoxContent)
+        // alert(EditSandBoxContent)
 
         var data = {
-            EditSandBoxContent: EditSandBoxContent
+            EditSandBoxContent: EditSandBoxContent,
+            status:'PASS'
         }
 
         if (WikiUserName !== 'None') {
@@ -77,14 +78,10 @@ document.getElementById("conformBTN").addEventListener("click", function () {
                 headers: new Headers({
                     'Content-Type': 'application/json'
                 })
-            }).then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                return response.json();
             })
-                .then(data => console.log("Response from server:", data))
-                .catch(error => console.error("Fetch error:", error));
+            alert("SandBox content edited is Successfully !")
+            location.reload();
+
         }
     }
 })
